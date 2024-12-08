@@ -24,10 +24,6 @@
     /* Interoperability */
     "esModuleInterop": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "include": ["src/**/*", "vite.config.ts"],
+  "exclude": ["node_modules"]
 }
