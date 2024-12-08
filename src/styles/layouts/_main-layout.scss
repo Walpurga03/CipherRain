@@ -12,6 +12,10 @@
   z-index: v.$z-index-content;
   padding: v.$spacing-md;
   text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   @include v.respond-to(md) {
     padding: v.$spacing-lg;
@@ -33,5 +37,20 @@ h1 {
   
   @include v.respond-to(lg) {
     font-size: calc(v.$base-font-size * 3.5);
+  }
+}
+
+.enter-matrix {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
