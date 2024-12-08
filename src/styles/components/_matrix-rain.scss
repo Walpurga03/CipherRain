@@ -1,0 +1,11 @@
+@use '../variables' as v;
+
+.matrix-rain-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: v.$z-index-background;
+  background: v.$background-black;
+}

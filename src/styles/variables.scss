@@ -1,0 +1,67 @@
+// Colors
+$matrix-green: #00ff00;
+$matrix-dark-green: #003300;
+$matrix-light-green: #33ff33;
+$background-black: #000000;
+$text-color: $matrix-green;
+$shadow-color: rgba(0, 255, 0, 0.5);
+
+// Matrix theme colors
+$matrix-primary: $matrix-green;
+$matrix-secondary: $matrix-dark-green;
+$matrix-accent: $matrix-light-green;
+
+// Breakpoints
+$breakpoint-xs: 320px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Mixins for responsive design
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: $breakpoint-xs) { @content; }
+  }
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+  @if $breakpoint == xxl {
+    @media (min-width: $breakpoint-xxl) { @content; }
+  }
+}
+
+// Typography
+$font-family-mono: 'Courier New', monospace;
+$base-font-size: 16px;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+// Animation
+$transition-speed: 0.3s;
+$matrix-rain-speed: 33ms;
+
+// Z-index layers
+$z-index-background: -1;
+$z-index-content: 1;
+$z-index-overlay: 10;
+$z-index-modal: 100;
+
+// Container widths
+$container-max-width: 1200px;
+$container-padding: $spacing-md;
