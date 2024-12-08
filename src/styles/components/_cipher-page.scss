@@ -1,0 +1,203 @@
+@use '../variables' as v;
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pageFadeInDesktop {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.cipher-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 100;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  animation: pageFadeIn 0.3s ease-out;
+  transform-origin: center center;
+
+  @media (min-width: 768px) {
+    animation: pageFadeInDesktop 0.3s ease-out;
+  }
+
+  .cipher-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+
+    .back-button {
+      background: none;
+      border: 1px solid v.$matrix-green;
+      color: v.$matrix-green;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(0, 255, 0, 0.1);
+        transform: translateX(-2px);
+      }
+    }
+
+    h2 {
+      color: v.$matrix-green;
+      font-family: v.$font-family-mono;
+      font-size: 1.5rem;
+      margin: 0;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+  }
+
+  .cipher-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+
+    label {
+      color: v.$matrix-green;
+      font-family: v.$font-family-mono;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    textarea, input {
+      width: 100%;
+      background: rgba(0, 255, 0, 0.05);
+      border: 1px solid rgba(0, 255, 0, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      color: v.$matrix-green;
+      font-family: v.$font-family-mono;
+      resize: vertical;
+      min-height: 100px;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: v.$matrix-green;
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+      }
+
+      &::placeholder {
+        color: rgba(0, 255, 0, 0.3);
+      }
+    }
+
+    input {
+      min-height: auto;
+      height: 40px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      .action-button {
+        flex: 1;
+        background: rgba(0, 255, 0, 0.1);
+        border: 1px solid v.$matrix-green;
+        color: v.$matrix-green;
+        padding: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: v.$font-family-mono;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(0, 255, 0, 0.2),
+            transparent
+          );
+          transition: 0.5s;
+        }
+
+        &:hover {
+          background: rgba(0, 255, 0, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
+
+          &::before {
+            left: 100%;
+          }
+        }
+
+        &:active {
+          transform: translateY(1px);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          &:hover {
+            background: rgba(0, 255, 0, 0.1);
+            transform: none;
+            box-shadow: none;
+          }
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+
+    .cipher-header {
+      padding: 1.5rem;
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    .cipher-content {
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+  }
+}

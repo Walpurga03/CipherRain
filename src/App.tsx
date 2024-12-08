@@ -1,12 +1,16 @@
 import { useState } from 'react';
-import MatrixRain from './MatrixRain';
+import MatrixRain from './components/MatrixRain';
 import MatrixButton from './components/MatrixButton';
 import MatrixTerminal from './components/MatrixTerminal';
+import CipherMenu from './components/CipherMenu';
+import CipherPage from './components/ciphers/CipherPage';
 import AudioService from './services/AudioService';
 
 function App() {
   const [isEntered, setIsEntered] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
+  const [showCipherMenu, setShowCipherMenu] = useState(false);
+  const [selectedCipher, setSelectedCipher] = useState<string | null>(null);
 
   const messages = [
     "Wake up, Neo...",
@@ -23,7 +27,17 @@ function App() {
 
   const handleTerminalComplete = () => {
     setShowTerminal(false);
-    // Hier können weitere Aktionen nach dem Terminal hinzugefügt werden
+    setShowCipherMenu(true);
+  };
+
+  const handleCipherSelect = (cipherId: string) => {
+    setSelectedCipher(cipherId);
+    setShowCipherMenu(false);
+  };
+
+  const handleBackToMenu = () => {
+    setSelectedCipher(null);
+    setShowCipherMenu(true);
   };
 
   return (
@@ -41,6 +55,15 @@ function App() {
           <MatrixTerminal 
             messages={messages} 
             onComplete={handleTerminalComplete}
+          />
+        )}
+        {showCipherMenu && !selectedCipher && (
+          <CipherMenu onSelect={handleCipherSelect} />
+        )}
+        {selectedCipher && (
+          <CipherPage 
+            cipherId={selectedCipher}
+            onBack={handleBackToMenu}
           />
         )}
       </div>
