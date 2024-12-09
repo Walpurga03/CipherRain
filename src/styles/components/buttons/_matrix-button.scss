@@ -1,0 +1,111 @@
+@use '../../variables' as v;
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes glitchText {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-20px);
+    filter: blur(4px);
+  }
+  30% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+    filter: blur(0);
+  }
+  32% {
+    clip-path: inset(0 0 0 95%);
+    transform: translateX(10px);
+  }
+  35% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes borderGlow {
+  0% {
+    box-shadow: none;
+    border-color: transparent;
+  }
+  50% {
+    box-shadow: 0 0 20px v.$matrix-primary;
+    border-color: v.$matrix-primary;
+  }
+  52% {
+    box-shadow: none;
+    border-color: transparent;
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(v.$matrix-primary, 0.5);
+    border-color: v.$matrix-primary;
+  }
+}
+
+.matrix-button {
+  position: relative;
+  padding: v.$spacing-md v.$spacing-xl;
+  font-family: v.$font-family-mono;
+  font-size: v.$base-font-size;
+  color: v.$matrix-primary;
+  background: rgba(v.$matrix-dark-green, 0.3);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  opacity: 0;
+  backdrop-filter: blur(5px);
+  
+  // Verzögerte Animationen
+  animation: 
+    fadeIn 1.5s ease-out 5.5s forwards,
+    glitchText 1.8s ease-out 5.8s forwards,
+    borderGlow 2.5s ease-out 5.5s forwards;
+  
+  // Hover Effekt
+  &:hover {
+    background: rgba(v.$matrix-dark-green, 0.5);
+    transform: translateY(-1px);
+    transition: all 0.3s ease;
+    
+    &::before {
+      transform: translateX(100%);
+    }
+  }
+  
+  // Scan-Linie
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(v.$matrix-primary, 0.4),
+      transparent
+    );
+    transition: transform 0.5s ease;
+  }
+  
+  // Active State
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 
+      0 0 5px rgba(v.$matrix-primary, 0.2),
+      inset 0 0 2px rgba(v.$matrix-primary, 0.3);
+  }
+}

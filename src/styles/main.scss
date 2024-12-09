@@ -7,10 +7,12 @@
 
 // Components
 @use 'components/matrix-rain';
-@use 'components/matrix-button';
 @use 'components/matrix-terminal';
-@use 'components/cipher-menu';
-@use 'components/cipher-page';
+@use 'components/buttons/matrix-button';
+@use 'components/popups/info-popup';
+@use 'components/ciphers/cipher-menu';
+@use 'components/ciphers/cipher-page';
+@use 'components/buttons/sound-button';
 
 // Zukünftige Komponenten
 // @use 'components/cipher-form';

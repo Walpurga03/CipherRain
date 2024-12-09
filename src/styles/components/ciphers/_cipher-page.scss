@@ -1,4 +1,4 @@
-@use '../variables' as v;
+@use '../../variables' as v;
 
 @keyframes pageFadeIn {
   from {
@@ -63,6 +63,28 @@
       &:hover {
         background: rgba(0, 255, 0, 0.1);
         transform: translateX(-2px);
+      }
+    }
+
+    .info-button {
+      background: none;
+      border: 1px solid v.$matrix-green;
+      color: v.$matrix-green;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-left: auto;
+      font-size: 1.2rem;
+
+      &:hover {
+        background: rgba(0, 255, 0, 0.1);
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
       }
     }
 

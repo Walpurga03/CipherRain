@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import MatrixRain from './components/MatrixRain';
-import MatrixButton from './components/MatrixButton';
+import MatrixButton from './components/common/buttons/MatrixButton';
 import MatrixTerminal from './components/MatrixTerminal';
 import CipherMenu from './components/CipherMenu';
 import CipherPage from './components/ciphers/CipherPage';
+import SoundButton from './components/common/buttons/SoundButton';
 import AudioService from './services/AudioService';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
   ];
 
   const handleEnterMatrix = () => {
-    AudioService.play('matrix-enter');
+    AudioService.getInstance().playSound('matrix-enter');
     setIsEntered(true);
     setShowTerminal(true);
   };
@@ -43,6 +44,7 @@ function App() {
   return (
     <div className="app">
       <MatrixRain />
+      {isEntered && <SoundButton />}
       <div className="content">
         {!isEntered && (
           <div className="enter-matrix">
@@ -53,7 +55,7 @@ function App() {
         )}
         {showTerminal && (
           <MatrixTerminal 
-            messages={messages} 
+            messages={messages}
             onComplete={handleTerminalComplete}
           />
         )}

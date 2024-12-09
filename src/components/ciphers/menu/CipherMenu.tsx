@@ -1,14 +1,14 @@
 import React from 'react';
 
-interface CipherMenuProps {
-  onSelect: (cipher: string) => void;
-}
-
 interface CipherOption {
   id: string;
   name: string;
   type: 'symmetric' | 'hash' | 'asymmetric';
   description: string;
+}
+
+interface CipherMenuProps {
+  onSelect: (cipherId: string) => void;
 }
 
 const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
@@ -49,15 +49,15 @@ const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
       id: 'ripemd160',
       name: 'RIPEMD-160',
       type: 'hash',
-      description: 'Kryptographische Hash-Funktion mit 160 Bit'
+      description: 'Kryptographische Hash-Funktion mit 160-Bit Ausgabe'
     },
     { 
       id: 'sha256',
       name: 'SHA-256',
       type: 'hash',
-      description: 'Secure Hash Algorithm mit 256 Bit'
+      description: 'Sicherer Hash-Algorithmus der SHA-2 Familie'
     },
-    // Asymmetrische Algorithmen
+    // Asymmetrischer Algorithmus
     { 
       id: 'rsa',
       name: 'RSA',
@@ -69,7 +69,7 @@ const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
   return (
     <div className="cipher-menu">
       <div className="menu-content">
-        <h2>Wähle eine Verschlüsselung</h2>
+        <h2>Wähle eine Verschlüsselungsmethode</h2>
         <div className="cipher-categories">
           <div className="category">
             <h3>Symmetrische Verschlüsselung</h3>

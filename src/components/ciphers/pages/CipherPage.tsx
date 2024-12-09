@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import CipherService from '../../services/CipherService';
-import InfoPopup from '../common/popups/InfoPopup';
+import CipherService from '../../../services/CipherService';
+import InfoPopup from '../../common/popups/InfoPopup';
 
 interface CipherPageProps {
   cipherId: string;

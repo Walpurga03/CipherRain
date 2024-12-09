@@ -1,22 +1,9 @@
-export class CipherService {
+import { CaesarService } from './ciphers/CaesarService';
+
+class CipherService {
   static caesar = {
-    encrypt: (text: string, shift: number): string => {
-      return text
-        .split('')
-        .map(char => {
-          if (char.match(/[a-z]/i)) {
-            const code = char.charCodeAt(0);
-            const isUpperCase = char === char.toUpperCase();
-            const base = isUpperCase ? 65 : 97;
-            return String.fromCharCode(((code - base + shift) % 26 + 26) % 26 + base);
-          }
-          return char;
-        })
-        .join('');
-    },
-    decrypt: (text: string, shift: number): string => {
-      return this.caesar.encrypt(text, 26 - (shift % 26));
-    }
+    encrypt: CaesarService.encrypt,
+    decrypt: CaesarService.decrypt
   };
 
   static xor = {
@@ -30,7 +17,7 @@ export class CipherService {
         .join('');
     },
     decrypt: (text: string, key: string): string => {
-      return this.xor.encrypt(text, key); // XOR ist symmetrisch
+      return CipherService.xor.encrypt(text, key); // XOR ist symmetrisch
     }
   };
 
@@ -44,3 +31,5 @@ export class CipherService {
     }
   };
 }
+
+export default CipherService;

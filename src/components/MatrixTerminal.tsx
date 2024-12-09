@@ -38,9 +38,11 @@ const MatrixTerminal: React.FC<MatrixTerminalProps> = ({ messages, onComplete })
 
   return (
     <div className="matrix-terminal">
-      <div className="matrix-terminal-text">
-        {displayedText}
-        {isTyping && <span className="cursor">_</span>}
+      <div className="terminal-content">
+        <p className={`matrix-text line-${currentMessageIndex + 1}`}>
+          {displayedText}
+          {isTyping && <span className="cursor">_</span>}
+        </p>
       </div>
     </div>
   );
