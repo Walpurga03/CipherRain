@@ -1,76 +1,104 @@
 import { useState } from 'react';
-import MatrixRain from './components/MatrixRain';
+import MatrixRain from './components/common/rain/MatrixRain';
 import MatrixButton from './components/common/buttons/MatrixButton';
-import MatrixTerminal from './components/MatrixTerminal';
-import CipherMenu from './components/CipherMenu';
-import CipherPage from './components/ciphers/CipherPage';
+import MatrixTerminal from './components/common/terminal/MatrixTerminal';
+import CipherMenu from './components/ciphers/menu/CipherMenu';
+import CaesarCipher from './components/ciphers/caesar/CaesarCipher';
+import InfoPopup from './components/common/popups/InfoPopup';
 import SoundButton from './components/common/buttons/SoundButton';
 import AudioService from './services/AudioService';
+import './App.scss';
 
-function App() {
-  const [isEntered, setIsEntered] = useState(false);
+const App = () => {
   const [showTerminal, setShowTerminal] = useState(false);
-  const [showCipherMenu, setShowCipherMenu] = useState(false);
+  const [showCipher, setShowCipher] = useState(false);
   const [selectedCipher, setSelectedCipher] = useState<string | null>(null);
+  const [showInfo, setShowInfo] = useState(false);
+  const [showSoundButton, setShowSoundButton] = useState(false);
 
-  const messages = [
+  const terminalMessages = [
     "Wake up, Neo...",
     "The Matrix has you...",
     "Follow the white rabbit...",
     "Knock, knock, Neo..."
   ];
 
-  const handleEnterMatrix = () => {
-    AudioService.getInstance().playSound('matrix-enter');
-    setIsEntered(true);
+  const handleMatrixButtonClick = () => {
     setShowTerminal(true);
+    setShowSoundButton(true);
+    // Sound automatisch starten
+    const audio = AudioService.getInstance();
+    audio.playSound('matrix-enter');
   };
 
   const handleTerminalComplete = () => {
     setShowTerminal(false);
-    setShowCipherMenu(true);
+    setShowCipher(true);
   };
 
   const handleCipherSelect = (cipherId: string) => {
     setSelectedCipher(cipherId);
-    setShowCipherMenu(false);
   };
 
-  const handleBackToMenu = () => {
+  const handleBackFromCipher = () => {
     setSelectedCipher(null);
-    setShowCipherMenu(true);
+  };
+
+  const handleSoundToggle = () => {
+    const audio = AudioService.getInstance();
+    audio.stopSound();
+    setShowSoundButton(false);
   };
 
   return (
     <div className="app">
       <MatrixRain />
-      {isEntered && <SoundButton />}
+      <SoundButton show={showSoundButton} onToggle={handleSoundToggle} />
+      
       <div className="content">
-        {!isEntered && (
-          <div className="enter-matrix">
-            <MatrixButton onClick={handleEnterMatrix}>
-              Enter The Matrix
-            </MatrixButton>
-          </div>
+        {!showTerminal && !showCipher && (
+          <MatrixButton onClick={handleMatrixButtonClick}>
+            ENTER THE MATRIX
+          </MatrixButton>
         )}
-        {showTerminal && (
+
+        {showTerminal && !showCipher && (
           <MatrixTerminal 
-            messages={messages}
+            messages={terminalMessages}
             onComplete={handleTerminalComplete}
           />
         )}
-        {showCipherMenu && !selectedCipher && (
-          <CipherMenu onSelect={handleCipherSelect} />
-        )}
-        {selectedCipher && (
-          <CipherPage 
-            cipherId={selectedCipher}
-            onBack={handleBackToMenu}
+
+        {showCipher && !selectedCipher && (
+          <CipherMenu 
+            onSelect={handleCipherSelect}
           />
         )}
+
+        {showCipher && selectedCipher === 'caesar' && (
+          <CaesarCipher onBack={handleBackFromCipher} />
+        )}
+
+        {/* Platzhalter für zukünftige Cipher-Implementierungen */}
+        {showCipher && selectedCipher && selectedCipher !== 'caesar' && (
+          <div className="placeholder">
+            <h2>In Entwicklung</h2>
+            <p>Diese Verschlüsselungsmethode wird noch implementiert.</p>
+            <button onClick={handleBackFromCipher}>Zurück zum Menü</button>
+          </div>
+        )}
       </div>
+
+      {showInfo && (
+        <InfoPopup 
+          isOpen={showInfo}
+          onClose={() => setShowInfo(false)}
+          title="About CipherRain"
+          content="Welcome to CipherRain, where cryptography meets the Matrix. Explore various encryption methods in a cyberpunk-inspired interface."
+        />
+      )}
     </div>
   );
-}
+};
 
 export default App;

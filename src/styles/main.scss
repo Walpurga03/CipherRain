@@ -1,20 +1,61 @@
-// Base
-@use 'variables' as v;
-@use 'base/reset';
+// Import all global styles
+@use 'index' as *;
 
-// Layouts
-@use 'layouts/main-layout';
+// Reset and global styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-// Components
-@use 'components/matrix-rain';
-@use 'components/matrix-terminal';
-@use 'components/buttons/matrix-button';
-@use 'components/popups/info-popup';
-@use 'components/ciphers/cipher-menu';
-@use 'components/ciphers/cipher-page';
-@use 'components/buttons/sound-button';
+:root {
+  font-family: $font-family-mono;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: $text-color;
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-// Zukünftige Komponenten
-// @use 'components/cipher-form';
-// @use 'components/button';
-// etc.
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: $background-black;
+  overflow-x: hidden;
+  font-family: $font-family-mono;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  min-height: 100vh;
+  color: $text-color;
+  font-family: $font-family-mono;
+  position: relative;
+}
+
+.content {
+  position: relative;
+  z-index: $z-index-content;
+  padding: $spacing-md;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @media (min-width: 768px) {
+    padding: $spacing-lg;
+  }
+}

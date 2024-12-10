@@ -1,16 +1,15 @@
-import React from 'react';
+import { ButtonHTMLAttributes } from 'react';
+import './MatrixButton.scss';
 
-interface MatrixButtonProps {
-  onClick: () => void;
-  children: React.ReactNode;
-}
+interface MatrixButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const MatrixButton: React.FC<MatrixButtonProps> = ({ onClick, children }) => {
+const MatrixButton: React.FC<MatrixButtonProps> = ({ children, ...props }) => {
   return (
-    <button className="matrix-button" onClick={onClick}>
-      <div className="matrix-code" />
-      {children}
-    </button>
+    <div className="matrix-button-container">
+      <button className="matrix-button" {...props}>
+        {children}
+      </button>
+    </div>
   );
 };
 

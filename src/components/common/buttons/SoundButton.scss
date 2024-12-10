@@ -1,0 +1,33 @@
+@use '../../../styles' as *;
+
+.sound-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba($background-black, 0.3);
+  border: 2px solid $matrix-primary;
+  color: $matrix-primary;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateX(20px);
+  z-index: $z-index-overlay;
+
+  &.fade-in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &:hover {
+    background: rgba($matrix-accent, 0.15);
+    color: #fff;
+    border-color: $matrix-light-green;
+    box-shadow: 0 0 15px rgba($matrix-primary, 0.7);
+    transform: scale(1.1);
+  }
+}

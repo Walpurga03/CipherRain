@@ -1,4 +1,5 @@
 import React from 'react';
+import './CipherMenu.scss';
 
 interface CipherOption {
   id: string;
@@ -16,13 +17,13 @@ const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
     // Symmetrische Algorithmen
     { 
       id: 'caesar',
-      name: 'Caesar Verschlüsselung',
+      name: 'Caesar',
       type: 'symmetric',
       description: 'Klassische Verschiebechiffre aus der Antike'
     },
     { 
       id: 'vigenere',
-      name: 'Vigenère Chiffre',
+      name: 'Vigenère',
       type: 'symmetric',
       description: 'Polyalphabetische Substitution mit Schlüsselwort'
     },
@@ -69,7 +70,9 @@ const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
   return (
     <div className="cipher-menu">
       <div className="menu-content">
-        <h2>Wähle eine Verschlüsselungsmethode</h2>
+        <h2 data-text="Wähle eine Verschlüsselungsmethode">
+          Wähle eine Verschlüsselungsmethode
+        </h2>
         <div className="cipher-categories">
           <div className="category">
             <h3>Symmetrische Verschlüsselung</h3>

@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
+import './MatrixTerminal.scss';
 
 interface MatrixTerminalProps {
   messages: string[];
   onComplete: () => void;
 }
 
-const MatrixTerminal: React.FC<MatrixTerminalProps> = ({ messages, onComplete }) => {
+const MatrixTerminal: React.FC<MatrixTerminalProps> = ({ 
+  messages, 
+  onComplete
+}) => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
@@ -38,6 +42,7 @@ const MatrixTerminal: React.FC<MatrixTerminalProps> = ({ messages, onComplete })
 
   return (
     <div className="matrix-terminal">
+      <div className="scanline"></div>
       <div className="terminal-content">
         <p className={`matrix-text line-${currentMessageIndex + 1}`}>
           {displayedText}

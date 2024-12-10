@@ -1,31 +1,20 @@
-import React, { useState } from 'react';
-import AudioService from '../../../services/AudioService';
+import React from 'react';
+import './SoundButton.scss';
 
-const SoundButton: React.FC = () => {
-  const [isMuted, setIsMuted] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+interface SoundButtonProps {
+  show: boolean;
+  onToggle: () => void;
+}
 
-  const toggleSound = () => {
-    const audio = AudioService.getInstance();
-    if (isMuted) {
-      setIsMuted(false);
-    } else {
-      audio.stopSound();
-      setIsMuted(true);
-      // Starte die Ausblend-Animation
-      setTimeout(() => setIsVisible(false), 300);
-    }
-  };
-
-  if (!isVisible) return null;
+const SoundButton: React.FC<SoundButtonProps> = ({ show, onToggle }) => {
+  if (!show) return null;
 
   return (
     <button 
-      className={`sound-button ${isMuted ? 'muted fade-out' : ''}`}
-      onClick={toggleSound}
-      title={isMuted ? 'Sound einschalten' : 'Sound ausschalten'}
+      className={`sound-button ${show ? 'fade-in' : ''}`}
+      onClick={onToggle}
     >
-      {isMuted ? '🔇' : '🔊'}
+      🔊
     </button>
   );
 };
