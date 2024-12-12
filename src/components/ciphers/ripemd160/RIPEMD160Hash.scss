@@ -95,7 +95,7 @@
         border: 1px solid rgba($matrix-primary, 0.3);
         border-radius: 8px;
         color: $matrix-primary;
-        font-family: $font-monospace;
+        font-family: $font-family-mono;
         resize: vertical;
 
         &:focus {
@@ -118,7 +118,7 @@
           border: 1px solid rgba($matrix-primary, 0.3);
           border-radius: 8px;
           color: $matrix-primary;
-          font-family: $font-monospace;
+          font-family: $font-family-mono;
 
           &:focus {
             outline: none;
