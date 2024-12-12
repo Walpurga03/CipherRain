@@ -1,0 +1,172 @@
+@use '../../../styles' as *;
+
+.ripemd160-cipher {
+  max-width: 800px;
+  width: 90%;
+  margin: 0 auto;
+  padding: $spacing-xl;
+  background: rgba($background-black, 0.7);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba($matrix-primary, 0.3);
+  border-radius: 12px;
+
+  @media (max-width: $breakpoint-sm) {
+    width: 95%;
+    padding: $spacing-md;
+  }
+  
+  .cipher-header {
+    margin-bottom: $spacing-xl;
+    
+    @media (max-width: $breakpoint-sm) {
+      margin-bottom: $spacing-lg;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-md;
+    }
+
+    .back-button {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      background: rgba($matrix-primary, 0.1);
+      border: 1px solid rgba($matrix-primary, 0.3);
+      color: $matrix-primary;
+      padding: $spacing-sm $spacing-md;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all $transition-normal;
+      text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+
+      @media (max-width: $breakpoint-sm) {
+        font-size: 1rem;
+        padding: $spacing-xs $spacing-sm;
+      }
+
+      &:hover {
+        background: rgba($matrix-primary, 0.2);
+        border-color: rgba($matrix-primary, 0.5);
+      }
+
+      .back-icon {
+        font-size: 1.2em;
+      }
+    }
+
+    h2 {
+      color: $matrix-primary;
+      text-align: center;
+      margin: 0;
+      font-size: 1.8rem;
+      text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+
+      @media (max-width: $breakpoint-sm) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .cipher-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+
+    .input-section, .output-section {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+
+      label {
+        color: $matrix-primary;
+        font-size: 1.1rem;
+        text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+      }
+
+      .matrix-textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: $spacing-md;
+        background: rgba($background-black, 0.7);
+        border: 1px solid rgba($matrix-primary, 0.3);
+        border-radius: 8px;
+        color: $matrix-primary;
+        font-family: $font-monospace;
+        resize: vertical;
+
+        &:focus {
+          outline: none;
+          border-color: rgba($matrix-primary, 0.5);
+          box-shadow: 0 0 8px rgba($matrix-primary, 0.3);
+        }
+      }
+    }
+
+    .output-section {
+      .output-container {
+        display: flex;
+        gap: $spacing-md;
+
+        .matrix-input {
+          flex-grow: 1;
+          padding: $spacing-md;
+          background: rgba($background-black, 0.7);
+          border: 1px solid rgba($matrix-primary, 0.3);
+          border-radius: 8px;
+          color: $matrix-primary;
+          font-family: $font-monospace;
+
+          &:focus {
+            outline: none;
+            border-color: rgba($matrix-primary, 0.5);
+            box-shadow: 0 0 8px rgba($matrix-primary, 0.3);
+          }
+        }
+
+        .copy-button {
+          background: rgba($matrix-primary, 0.1);
+          border: 1px solid rgba($matrix-primary, 0.3);
+          color: $matrix-primary;
+          padding: $spacing-sm $spacing-md;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all $transition-normal;
+          white-space: nowrap;
+
+          &:hover {
+            background: rgba($matrix-primary, 0.2);
+            border-color: rgba($matrix-primary, 0.5);
+          }
+        }
+      }
+    }
+  }
+
+  .wiki-link {
+    text-align: center;
+    margin-top: $spacing-lg;
+
+    a {
+      color: $matrix-primary;
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      transition: all $transition-normal;
+
+      &:hover {
+        opacity: 1;
+        text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+      }
+    }
+  }
+
+  .error-message {
+    color: $error-color;
+    font-size: 0.9rem;
+    margin-top: $spacing-sm;
+  }
+}

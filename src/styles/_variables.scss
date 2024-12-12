@@ -6,6 +6,29 @@ $background-black: #000000;
 $text-color: $matrix-green;
 $shadow-color: rgba(0, 255, 0, 0.5);
 
+// Theme colors
+$color-primary: $matrix-green;
+$color-secondary: $matrix-dark-green;
+$color-accent: $matrix-light-green;
+$color-background: $background-black;
+$color-background-light: rgba($background-black, 0.8);
+$color-text: $matrix-green;
+$color-text-light: #ffffff;
+$color-text-muted: rgba($matrix-green, 0.7);
+$color-border: $matrix-green;
+
+// Box shadows
+$box-shadow-sm: 0 2px 4px rgba($matrix-green, 0.1);
+$box-shadow-md: 0 4px 6px rgba($matrix-green, 0.1);
+$box-shadow-lg: 0 10px 15px rgba($matrix-green, 0.1);
+$box-shadow-hover: 0 5px 15px rgba($matrix-green, 0.2);
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-md: 6px;
+$border-radius-lg: 8px;
+$border-radius-xl: 12px;
+
 // Matrix theme colors
 $matrix-primary: $matrix-green;
 $matrix-secondary: $matrix-dark-green;

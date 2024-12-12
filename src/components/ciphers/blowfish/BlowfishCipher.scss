@@ -1,0 +1,334 @@
+@use '../../../styles' as *;
+
+.caesar-cipher {
+  max-width: 800px;
+  width: 90%;
+  margin: 0 auto;
+  padding: $spacing-xl;
+  background: rgba($background-black, 0.7);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba($matrix-primary, 0.3);
+  border-radius: 12px;
+
+  @media (max-width: $breakpoint-sm) {
+    width: 95%;
+    padding: $spacing-md;
+  }
+  
+  .cipher-header {
+    margin-bottom: $spacing-xl;
+    
+    @media (max-width: $breakpoint-sm) {
+      margin-bottom: $spacing-lg;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-md;
+    }
+
+    .back-button {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      background: rgba($matrix-primary, 0.1);
+      border: 1px solid rgba($matrix-primary, 0.3);
+      color: $matrix-primary;
+      padding: $spacing-sm $spacing-md;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all $transition-normal;
+      text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+
+      @media (max-width: $breakpoint-sm) {
+        font-size: 1rem;
+        padding: $spacing-xs $spacing-sm;
+      }
+
+      .back-icon {
+        font-size: 1.4em;
+        line-height: 1;
+        transition: transform $transition-normal;
+      }
+
+      .back-text {
+        font-family: $font-family-mono;
+      }
+
+      &:hover {
+        background: rgba($matrix-primary, 0.2);
+        border-color: rgba($matrix-primary, 0.5);
+        transform: translateX(-4px);
+        box-shadow: 0 0 15px rgba($matrix-primary, 0.3);
+
+        .back-icon {
+          transform: translateX(-2px);
+        }
+      }
+
+      &:active {
+        transform: translateX(-2px);
+        background: rgba($matrix-primary, 0.3);
+      }
+    }
+
+    .info-button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba($matrix-primary, 0.1);
+      border: 1px solid rgba($matrix-primary, 0.3);
+      color: $matrix-primary;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all $transition-normal;
+      font-family: $font-family-mono;
+      font-style: italic;
+      font-size: 1.2rem;
+      text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+
+      @media (max-width: $breakpoint-sm) {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+      }
+
+      &:hover {
+        background: rgba($matrix-primary, 0.2);
+        border-color: rgba($matrix-primary, 0.5);
+        box-shadow: 0 0 15px rgba($matrix-primary, 0.3);
+      }
+
+      &:active {
+        background: rgba($matrix-primary, 0.3);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      color: $matrix-primary;
+      font-size: 1.8rem;
+      margin: $spacing-md 0;
+      font-family: $font-family-mono;
+      text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+
+      @media (max-width: $breakpoint-sm) {
+        font-size: 1.5rem;
+        margin: $spacing-sm 0;
+      }
+    }
+  }
+
+  .shift-control {
+    margin-bottom: $spacing-lg;
+    padding: $spacing-md;
+    background: rgba($matrix-primary, 0.1);
+    border: 1px solid rgba($matrix-primary, 0.3);
+    border-radius: $border-radius-lg;
+
+    .shift-label {
+      color: $matrix-primary;
+      margin-bottom: $spacing-sm;
+      font-family: $font-family-mono;
+      font-size: 1.1rem;
+      text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+    }
+
+    .shift-input {
+      width: 100%;
+      padding: $spacing-sm;
+      background: rgba($background-black, 0.5);
+      border: 1px solid rgba($matrix-primary, 0.3);
+      border-radius: $border-radius-md;
+      color: $color-text-light;
+      font-family: $font-family-mono;
+      font-size: 1.1rem;
+
+      &:focus {
+        outline: none;
+        border-color: rgba($matrix-primary, 0.5);
+        box-shadow: 0 0 15px rgba($matrix-primary, 0.3);
+      }
+    }
+  }
+
+  .text-area {
+    margin-bottom: $spacing-lg;
+
+    @media (max-width: $breakpoint-sm) {
+      margin-bottom: $spacing-md;
+    }
+
+    label {
+      display: block;
+      color: $matrix-primary;
+      margin-bottom: $spacing-xs;
+      font-family: $font-family-mono;
+      font-size: 1.1rem;
+      text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: $spacing-sm;
+      background: rgba($background-black, 0.5);
+      border: 1px solid rgba($matrix-primary, 0.3);
+      border-radius: $border-radius-md;
+      color: $color-text-light;
+      font-family: $font-family-mono;
+      font-size: 1.1rem;
+      resize: vertical;
+
+      &:focus {
+        outline: none;
+        border-color: rgba($matrix-primary, 0.5);
+        box-shadow: 0 0 15px rgba($matrix-primary, 0.3);
+      }
+
+      &::placeholder {
+        color: rgba($color-text-light, 0.3);
+      }
+    }
+  }
+
+  .button-group {
+    display: flex;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-lg;
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      margin-bottom: $spacing-md;
+    }
+
+    .action-button {
+      flex: 1;
+      padding: $spacing-sm $spacing-md;
+      background: rgba($matrix-primary, 0.1);
+      border: 1px solid rgba($matrix-primary, 0.3);
+      border-radius: $border-radius-md;
+      color: $matrix-primary;
+      font-family: $font-family-mono;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all $transition-normal;
+      text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+
+      &:hover {
+        background: rgba($matrix-primary, 0.2);
+        border-color: rgba($matrix-primary, 0.5);
+        box-shadow: 0 0 15px rgba($matrix-primary, 0.3);
+      }
+
+      &.active {
+        background: rgba($matrix-primary, 0.2);
+        border-color: rgba($matrix-primary, 0.5);
+        box-shadow: 0 0 15px rgba($matrix-primary, 0.3);
+      }
+    }
+  }
+
+  .info-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($background-black, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .info-content {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      background: linear-gradient(
+        135deg,
+        rgba($background-black, 0.95) 0%,
+        rgba(lighten($background-black, 5%), 0.9) 100%
+      );
+      border: 1px solid rgba($matrix-primary, 0.3);
+      border-radius: $border-radius-lg;
+      padding: $spacing-lg;
+      color: $color-text-light;
+
+      @media (max-width: $breakpoint-sm) {
+        width: 95%;
+        padding: $spacing-md;
+      }
+
+      h3 {
+        color: $matrix-primary;
+        text-align: center;
+        font-size: 1.4rem;
+        margin-bottom: $spacing-md;
+        font-family: $font-family-mono;
+        text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+
+        @media (max-width: $breakpoint-sm) {
+          font-size: 1.2rem;
+        }
+      }
+
+      .info-text {
+        p {
+          margin-bottom: $spacing-md;
+          line-height: $line-height-base;
+          font-size: 1.1rem;
+
+          @media (max-width: $breakpoint-sm) {
+            font-size: 1rem;
+            margin-bottom: $spacing-sm;
+          }
+        }
+      }
+
+      .close-btn {
+        position: absolute;
+        top: $spacing-sm;
+        right: $spacing-sm;
+        background: none;
+        border: none;
+        color: $matrix-primary;
+        font-size: 1.8rem;
+        cursor: pointer;
+        padding: $spacing-xs;
+        transition: all $transition-normal;
+        
+        &:hover {
+          color: $color-text-light;
+          text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+        }
+      }
+
+      .wiki-link {
+        margin-top: $spacing-lg;
+        padding-top: $spacing-md;
+        text-align: center;
+        border-top: 1px solid rgba($matrix-primary, 0.15);
+
+        a {
+          color: $matrix-primary;
+          text-decoration: none;
+          font-size: 1.1rem;
+          transition: all $transition-normal;
+          
+          &:hover {
+            text-decoration: underline;
+            text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
+          }
+        }
+      }
+    }
+  }
+}

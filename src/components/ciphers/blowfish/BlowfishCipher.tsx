@@ -1,32 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import CipherService from '../../../services/CipherService';
-import './CaesarCipher.scss';
+import { BlowfishService } from '../../../services/ciphers/BlowfishService';
+import './BlowfishCipher.scss';
 
-interface CaesarCipherProps {
+interface BlowfishCipherProps {
   onBack: () => void;
 }
 
-const caesarInfo = {
-  title: "Caesar Verschlüsselung",
-  description: `Die Caesar-Verschlüsselung ist eine der ältesten und einfachsten Verschlüsselungsmethoden. 
-  Jeder Buchstabe im Klartext wird um eine bestimmte Anzahl von Positionen im Alphabet verschoben.
+const blowfishInfo = {
+  title: "Blowfish Verschlüsselung",
+  description: `Die Blowfish-Verschlüsselung ist eine leistungsstarke symmetrische Blockchiffre, die 1993 von Bruce Schneier entwickelt wurde.
 
-  Beispiel mit Verschiebung 3:
-  A → D, B → E, C → F, usw.
+  Funktionsweise:
+  - Schlüssellänge: 32 bis 448 Bit
+  - Blockgröße: 64 Bit
+  - 16 Runden Feistel-Netzwerk
   
   Vorteile:
-  - Einfach zu verstehen und anzuwenden
-  - Schnelle Verschlüsselung und Entschlüsselung
+  - Sehr schnell auf 32-Bit-Systemen
+  - Frei verfügbar, keine Patente
+  - Kompakter Code (4KB)
   
-  Nachteile:
-  - Sehr unsicher, da es nur 25 mögliche Schlüssel gibt
-  - Anfällig für Häufigkeitsanalysen
+  Besonderheiten:
+  - Verwendet S-Boxen und P-Arrays
+  - Schlüsselabhängige S-Boxen
+  - Keine bekannten erfolgreichen Angriffe
   
-  Historisch wurde diese Verschlüsselung von Julius Caesar für militärische Kommunikation verwendet.`,
+  Diese Verschlüsselung wird häufig in Passwort-Hashing-Systemen und für sichere Kommunikation verwendet.`,
 };
 
-export const CaesarCipher: React.FC<CaesarCipherProps> = ({ onBack }) => {
-  const [shift, setShift] = useState<number>(3);
+export const BlowfishCipher: React.FC<BlowfishCipherProps> = ({ onBack }) => {
+  const [key, setKey] = useState<string>('');
   const [input, setInput] = useState<string>('');
   const [output, setOutput] = useState<string>('');
   const [isEncrypting, setIsEncrypting] = useState<boolean>(true);
@@ -34,7 +37,7 @@ export const CaesarCipher: React.FC<CaesarCipherProps> = ({ onBack }) => {
 
   useEffect(() => {
     processText();
-  }, [input, shift, isEncrypting]);
+  }, [input, key, isEncrypting]);
 
   useEffect(() => {
     if (showInfo) {
@@ -48,19 +51,18 @@ export const CaesarCipher: React.FC<CaesarCipherProps> = ({ onBack }) => {
   }, [showInfo]);
 
   const processText = () => {
-    if (input) {
-      const result = isEncrypting 
-        ? CipherService.caesar.encrypt(input, shift)
-        : CipherService.caesar.decrypt(input, shift);
-      setOutput(result);
+    if (input && key) {
+      try {
+        const result = isEncrypting 
+          ? BlowfishService.encrypt(input, key)
+          : BlowfishService.decrypt(input, key);
+        setOutput(result);
+      } catch (error: any) {
+        setOutput(`Fehler: ${error?.message || 'Unbekannter Fehler'}`);
+      }
     } else {
       setOutput('');
     }
-  };
-
-  const handleShiftChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value) || 0;
-    setShift(value);
   };
 
   return (
@@ -75,21 +77,21 @@ export const CaesarCipher: React.FC<CaesarCipherProps> = ({ onBack }) => {
             <span className="info-icon">i</span>
           </button>
         </div>
-        <h2>Caesar Verschlüsselung</h2>
+        <h2>Blowfish Verschlüsselung</h2>
       </div>
 
       {showInfo && (
         <div className="info-overlay" onClick={() => setShowInfo(false)}>
           <div className="info-content" onClick={e => e.stopPropagation()}>
             <button className="close-btn" onClick={() => setShowInfo(false)}>×</button>
-            <h3>{caesarInfo.title}</h3>
+            <h3>{blowfishInfo.title}</h3>
             <div className="info-text">
-              {caesarInfo.description.split('\n\n').map((paragraph, index) => (
+              {blowfishInfo.description.split('\n\n').map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
             </div>
             <div className="wiki-link">
-              <a href="https://de.wikipedia.org/wiki/Caesar-Verschl%C3%BCsselung" 
+              <a href="https://de.wikipedia.org/wiki/Blowfish" 
                  target="_blank" 
                  rel="noopener noreferrer">
                 Mehr auf Wikipedia
@@ -100,14 +102,15 @@ export const CaesarCipher: React.FC<CaesarCipherProps> = ({ onBack }) => {
       )}
 
       <div className="shift-control">
-        <div className="shift-label">Verschiebung</div>
+        <div className="shift-label">Schlüssel</div>
         <input
-          type="number"
+          type="text"
           className="shift-input"
-          value={shift}
-          onChange={handleShiftChange}
-          min="0"
-          max="25"
+          value={key}
+          onChange={(e) => setKey(e.target.value)}
+          placeholder="Schlüssel eingeben (4-56 Zeichen)..."
+          minLength={4}
+          maxLength={56}
         />
       </div>
 
@@ -137,10 +140,14 @@ export const CaesarCipher: React.FC<CaesarCipherProps> = ({ onBack }) => {
 
       <div className="text-area">
         <label>Ausgabetext</label>
-        <textarea value={output} readOnly placeholder="Hier erscheint das Ergebnis..." />
+        <textarea 
+          value={output} 
+          readOnly 
+          placeholder="Hier erscheint das Ergebnis..." 
+        />
       </div>
     </div>
   );
 };
 
-export default CaesarCipher;
+export default BlowfishCipher;

@@ -4,16 +4,19 @@ import MatrixButton from './components/common/buttons/MatrixButton';
 import MatrixTerminal from './components/common/terminal/MatrixTerminal';
 import CipherMenu from './components/ciphers/menu/CipherMenu';
 import CaesarCipher from './components/ciphers/caesar/CaesarCipher';
-import InfoPopup from './components/common/popups/InfoPopup';
+import VigenereCipher from './components/ciphers/vigenere/VigenereCipher';
+import BlowfishCipher from './components/ciphers/blowfish/BlowfishCipher';
+import AESCipher from './components/ciphers/aes/AESCipher';
+import XORCipher from './components/ciphers/xor/XORCipher';
+import RIPEMD160Hash from './components/ciphers/ripemd160/RIPEMD160Hash';
 import SoundButton from './components/common/buttons/SoundButton';
 import AudioService from './services/AudioService';
 import './App.scss';
 
-const App = () => {
+const App: React.FC = () => {
   const [showTerminal, setShowTerminal] = useState(false);
   const [showCipher, setShowCipher] = useState(false);
   const [selectedCipher, setSelectedCipher] = useState<string | null>(null);
-  const [showInfo, setShowInfo] = useState(false);
   const [showSoundButton, setShowSoundButton] = useState(false);
 
   const terminalMessages = [
@@ -36,18 +39,29 @@ const App = () => {
     setShowCipher(true);
   };
 
-  const handleCipherSelect = (cipherId: string) => {
-    setSelectedCipher(cipherId);
-  };
-
-  const handleBackFromCipher = () => {
-    setSelectedCipher(null);
-  };
-
   const handleSoundToggle = () => {
     const audio = AudioService.getInstance();
     audio.stopSound();
     setShowSoundButton(false);
+  };
+
+  const renderContent = () => {
+    switch (selectedCipher) {
+      case 'caesar':
+        return <CaesarCipher onBack={() => setSelectedCipher(null)} />;
+      case 'vigenere':
+        return <VigenereCipher onBack={() => setSelectedCipher(null)} />;
+      case 'blowfish':
+        return <BlowfishCipher onBack={() => setSelectedCipher(null)} />;
+      case 'aes':
+        return <AESCipher onBack={() => setSelectedCipher(null)} />;
+      case 'xor':
+        return <XORCipher onBack={() => setSelectedCipher(null)} />;
+      case 'ripemd160':
+        return <RIPEMD160Hash onBack={() => setSelectedCipher(null)} />;
+      default:
+        return <CipherMenu onSelect={setSelectedCipher} />;
+    }
   };
 
   return (
@@ -69,34 +83,10 @@ const App = () => {
           />
         )}
 
-        {showCipher && !selectedCipher && (
-          <CipherMenu 
-            onSelect={handleCipherSelect}
-          />
-        )}
-
-        {showCipher && selectedCipher === 'caesar' && (
-          <CaesarCipher onBack={handleBackFromCipher} />
-        )}
-
-        {/* Platzhalter für zukünftige Cipher-Implementierungen */}
-        {showCipher && selectedCipher && selectedCipher !== 'caesar' && (
-          <div className="placeholder">
-            <h2>In Entwicklung</h2>
-            <p>Diese Verschlüsselungsmethode wird noch implementiert.</p>
-            <button onClick={handleBackFromCipher}>Zurück zum Menü</button>
-          </div>
+        {showCipher && (
+          renderContent()
         )}
       </div>
-
-      {showInfo && (
-        <InfoPopup 
-          isOpen={showInfo}
-          onClose={() => setShowInfo(false)}
-          title="About CipherRain"
-          content="Welcome to CipherRain, where cryptography meets the Matrix. Explore various encryption methods in a cyberpunk-inspired interface."
-        />
-      )}
     </div>
   );
 };

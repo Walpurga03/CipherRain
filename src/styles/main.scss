@@ -1,4 +1,4 @@
-// Import all global styles
+// Import global styles
 @use 'index' as *;
 
 // Reset and global styles
@@ -22,14 +22,9 @@
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: $background-black;
   overflow-x: hidden;
-  font-family: $font-family-mono;
 }
 
 #root {
@@ -40,8 +35,6 @@ body {
 
 .app {
   min-height: 100vh;
-  color: $text-color;
-  font-family: $font-family-mono;
   position: relative;
 }
 

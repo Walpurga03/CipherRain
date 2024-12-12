@@ -6,6 +6,7 @@ interface CipherOption {
   name: string;
   type: 'symmetric' | 'hash' | 'asymmetric';
   description: string;
+  icon?: string;
 }
 
 interface CipherMenuProps {
@@ -17,40 +18,46 @@ const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
     // Symmetrische Algorithmen
     { 
       id: 'caesar',
-      name: 'Caesar',
+      name: 'Caesar Verschlüsselung',
       type: 'symmetric',
-      description: 'Klassische Verschiebechiffre aus der Antike'
+      description: 'Klassische Verschiebechiffre',
+      icon: '⚔️'
     },
     { 
       id: 'vigenere',
-      name: 'Vigenère',
+      name: 'Vigenère Verschlüsselung',
       type: 'symmetric',
-      description: 'Polyalphabetische Substitution mit Schlüsselwort'
+      description: 'Polyalphabetische Substitution mit Schlüsselwort',
+      icon: '🔠'
     },
     { 
       id: 'blowfish',
-      name: 'Blowfish',
+      name: 'Blowfish Verschlüsselung',
       type: 'symmetric',
-      description: 'Schneller symmetrischer Block-Algorithmus'
+      description: 'Moderne symmetrische Blockchiffre',
+      icon: '🐡'
     },
     { 
       id: 'aes',
       name: 'AES',
       type: 'symmetric',
-      description: 'Advanced Encryption Standard - Modernster Verschlüsselungsstandard'
+      description: 'Advanced Encryption Standard - Modernster Verschlüsselungsstandard',
+      icon: '🔒'
     },
     { 
       id: 'xor',
       name: 'XOR',
       type: 'symmetric',
-      description: 'Einfache aber effektive XOR-Verschlüsselung'
+      description: 'Einfache aber effektive XOR-Verschlüsselung',
+      icon: '⊕'
     },
     // Hash Funktionen
     { 
       id: 'ripemd160',
       name: 'RIPEMD-160',
       type: 'hash',
-      description: 'Kryptographische Hash-Funktion mit 160-Bit Ausgabe'
+      description: 'Kryptographische Hash-Funktion mit 160-Bit Ausgabe',
+      icon: '#️⃣'
     },
     { 
       id: 'sha256',
@@ -85,6 +92,7 @@ const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
                 >
                   <div className="cipher-button-content">
                     <span className="cipher-name">{cipher.name}</span>
+                    {cipher.icon && <span className="cipher-icon">{cipher.icon}</span>}
                     <span className="cipher-description">{cipher.description}</span>
                   </div>
                 </button>
@@ -103,6 +111,7 @@ const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
                 >
                   <div className="cipher-button-content">
                     <span className="cipher-name">{cipher.name}</span>
+                    {cipher.icon && <span className="cipher-icon">{cipher.icon}</span>}
                     <span className="cipher-description">{cipher.description}</span>
                   </div>
                 </button>
