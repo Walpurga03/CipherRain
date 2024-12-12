@@ -165,8 +165,10 @@
   }
 
   .error-message {
-    color: $error-color;
+    color: #ff4444;
     font-size: 0.9rem;
     margin-top: $spacing-sm;
+    font-family: $font-family-mono;
+    text-shadow: 0 0 8px rgba(#ff4444, 0.5);
   }
 }
