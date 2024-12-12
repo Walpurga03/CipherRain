@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CipherService from '../../../services/CipherService';
-import InfoPopup from '../../common/popups/InfoPopup';
+import './CipherPage.scss';
 
 interface CipherPageProps {
   cipherId: string;
@@ -12,7 +12,6 @@ const CipherPage: React.FC<CipherPageProps> = ({ onBack }) => {
   const [output, setOutput] = useState('');
   const [key, setKey] = useState('3'); // Default Caesar shift
   const [isProcessing, setIsProcessing] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
 
   const handleEncrypt = () => {
     if (!input) return;
@@ -49,7 +48,6 @@ const CipherPage: React.FC<CipherPageProps> = ({ onBack }) => {
       <div className="cipher-header">
         <button className="back-button" onClick={onBack}>←</button>
         <h2>Caesar Verschlüsselung</h2>
-        <button className="info-button" onClick={() => setShowInfo(true)}>ℹ️</button>
       </div>
 
       <div className="cipher-content">
@@ -108,25 +106,6 @@ const CipherPage: React.FC<CipherPageProps> = ({ onBack }) => {
           </label>
         </div>
       </div>
-
-      {showInfo && (
-        <InfoPopup
-          isOpen={true}
-          onClose={() => setShowInfo(false)}
-          title="Caesar-Verschlüsselung"
-          content="Die Caesar-Verschlüsselung ist eines der einfachsten und bekanntesten Verschlüsselungsverfahren. Sie wurde nach Julius Caesar benannt, der sie zur geheimen Kommunikation mit seinen Generälen nutzte.
-
-Bei dieser Verschlüsselung wird jeder Buchstabe im Klartext um eine bestimmte Anzahl von Stellen im Alphabet verschoben. Die Verschiebung (der Schlüssel) ist typischerweise 3, kann aber beliebig gewählt werden.
-
-Beispiel mit Verschiebung 3:
-A → D
-B → E
-C → F
-...
-Z → C"
-          wikiLink="https://de.wikipedia.org/wiki/Caesar-Verschl%C3%BCsselung"
-        />
-      )}
     </div>
   );
 };
