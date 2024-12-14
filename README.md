@@ -1,50 +1,54 @@
-# React + TypeScript + Vite
+# CipherRain
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Projektübersicht
+CipherRain ist eine vielseitige Verschlüsselungsanwendung, die verschiedene Algorithmen zur Sicherung von Informationen bereitstellt. Die Anwendung bietet eine benutzerfreundliche Oberfläche und ist für den Einsatz in verschiedenen Szenarien geeignet, von der einfachen Verschlüsselung bis hin zur komplexen Datenverarbeitung.
 
-Currently, two official plugins are available:
+## Features
+- Unterstützung für mehrere Verschlüsselungsalgorithmen:
+  - RSA
+  - AES
+  - Blowfish
+  - Caesar
+  - Vigenere
+  - XOR
+  - SHA-256
+  - RIPEMD-160
+- Benutzerfreundliche Oberfläche mit Matrix-Design
+- Möglichkeit, eigene Schlüssel für RSA zu verwenden
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+1. Repository klonen:
+   ```bash
+   git clone <repository-url>
+   ```
+2. In das Projektverzeichnis wechseln:
+   ```bash
+   cd CipherRain
+   ```
+3. Abhängigkeiten installieren:
+   ```bash
+   npm install
+   ```
+4. Anwendung starten:
+   ```bash
+   npm start
+   ```
 
-## Expanding the ESLint configuration
+## Verwendung
+- Starten Sie die Anwendung und wählen Sie den gewünschten Verschlüsselungsalgorithmus aus dem Menü.
+- Geben Sie den zu verschlüsselnden oder zu entschlüsselnden Text ein.
+- Verwenden Sie die generierten oder eigenen Schlüssel, um die Operationen durchzuführen.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologien
+- React
+- TypeScript
+- SCSS
+- Vite
+- jsencrypt
+- crypto-js
 
-- Configure the top-level `parserOptions` property like this:
+## Mitwirkende
+Beiträge sind willkommen! Bitte erstellen Sie einen Pull-Request oder eröffnen Sie ein Issue, um Vorschläge zu machen.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Lizenz
+Dieses Projekt ist unter der MIT-Lizenz lizenziert.

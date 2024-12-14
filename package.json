@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/crypto-js": "^4.2.2",
     "crypto-js": "^4.2.0",
+    "jsencrypt": "^3.3.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^5.4.0"

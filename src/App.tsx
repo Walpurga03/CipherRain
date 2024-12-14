@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import RSACipher from './components/ciphers/rsa/RSACipher';
 import MatrixRain from './components/common/rain/MatrixRain';
 import MatrixButton from './components/common/buttons/MatrixButton';
 import MatrixTerminal from './components/common/terminal/MatrixTerminal';
@@ -9,6 +10,7 @@ import BlowfishCipher from './components/ciphers/blowfish/BlowfishCipher';
 import AESCipher from './components/ciphers/aes/AESCipher';
 import XORCipher from './components/ciphers/xor/XORCipher';
 import RIPEMD160Hash from './components/ciphers/ripemd160/RIPEMD160Hash';
+import SHA256Hash from './components/ciphers/sha256/SHA256Hash';
 import SoundButton from './components/common/buttons/SoundButton';
 import AudioService from './services/AudioService';
 import './App.scss';
@@ -59,6 +61,10 @@ const App: React.FC = () => {
         return <XORCipher onBack={() => setSelectedCipher(null)} />;
       case 'ripemd160':
         return <RIPEMD160Hash onBack={() => setSelectedCipher(null)} />;
+      case 'sha256':
+        return <SHA256Hash onBack={() => setSelectedCipher(null)} />;
+      case 'rsa':
+        return <RSACipher onBack={() => setSelectedCipher(null)} />;
       default:
         return <CipherMenu onSelect={setSelectedCipher} />;
     }

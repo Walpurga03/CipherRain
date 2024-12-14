@@ -63,14 +63,16 @@ const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
       id: 'sha256',
       name: 'SHA-256',
       type: 'hash',
-      description: 'Sicherer Hash-Algorithmus der SHA-2 Familie'
+      description: 'Sicherer Hash-Algorithmus der SHA-2 Familie',
+      icon: '🔐'
     },
     // Asymmetrischer Algorithmus
     { 
       id: 'rsa',
       name: 'RSA',
       type: 'asymmetric',
-      description: 'Public-Key-Verschlüsselung für sichere Kommunikation'
+      description: 'Public-Key-Verschlüsselung für sichere Kommunikation',
+      icon: '🔑'
     }
   ];
 
