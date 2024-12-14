@@ -132,6 +132,7 @@ const CipherMenu: React.FC<CipherMenuProps> = ({ onSelect }) => {
                 >
                   <div className="cipher-button-content">
                     <span className="cipher-name">{cipher.name}</span>
+                    {cipher.icon && <span className="cipher-icon">{cipher.icon}</span>}
                     <span className="cipher-description">{cipher.description}</span>
                   </div>
                 </button>

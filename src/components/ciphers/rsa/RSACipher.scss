@@ -109,9 +109,15 @@
 .rsa-header {
   margin-bottom: $spacing-xl;
   text-align: center;
+  margin-top: $spacing-xxl;
 
   @media (max-width: $breakpoint-md) {
     margin-bottom: $spacing-lg;
+    margin-top: $spacing-xl;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    margin-top: $spacing-xxl;
   }
 }
 
@@ -425,6 +431,12 @@
   margin-bottom: $spacing-xl;
   padding-bottom: $spacing-md;
   border-bottom: 1px solid rgba($matrix-primary, 0.2);
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+  }
 }
 
 .rsa-section-title {
@@ -433,6 +445,48 @@
   margin: 0;
   text-shadow: 0 0 8px rgba($matrix-primary, 0.5);
   letter-spacing: 1px;
+
+  @media (max-width: $breakpoint-sm) {
+    text-align: center;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.rsa-key-options {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: $spacing-sm;
+    margin-bottom: 0;
+  }
+}
+
+.rsa-key-option {
+  padding: $spacing-sm $spacing-md;
+  background: rgba($matrix-primary, 0.1);
+  border: 1px solid rgba($matrix-primary, 0.3);
+  color: $matrix-primary;
+  border-radius: $border-radius-lg;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+
+  @media (max-width: $breakpoint-sm) {
+    flex: 1;
+    text-align: center;
+    padding: $spacing-xs $spacing-sm;
+    font-size: 0.9rem;
+  }
 }
 
 .rsa-key-container {
@@ -480,45 +534,6 @@
     opacity: 1;
     text-shadow: 0 0 12px rgba($matrix-primary, 0.6);
     text-decoration: underline;
-  }
-}
-
-.rsa-key-options {
-  display: flex;
-  gap: $spacing-md;
-  margin-bottom: $spacing-lg;
-
-  @media (max-width: $breakpoint-md) {
-    flex-direction: column;
-    gap: $spacing-sm;
-  }
-}
-
-.rsa-key-option {
-  padding: $spacing-sm $spacing-md;
-  background: rgba($matrix-primary, 0.1);
-  border: 1px solid rgba($matrix-primary, 0.3);
-  color: $matrix-primary;
-  border-radius: $border-radius-lg;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-
-  &:hover {
-    background: rgba($matrix-primary, 0.2);
-    border-color: rgba($matrix-primary, 0.5);
-    box-shadow: 0 0 15px rgba($matrix-primary, 0.3);
-  }
-
-  &.active {
-    background: rgba($matrix-primary, 0.3);
-    border-color: rgba($matrix-primary, 0.7);
-    box-shadow: 0 0 20px rgba($matrix-primary, 0.4);
-  }
-
-  @media (max-width: $breakpoint-md) {
-    font-size: 0.9rem;
-    padding: $spacing-xs $spacing-sm;
   }
 }
 
